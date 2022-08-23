@@ -12,20 +12,19 @@ export class PostsService {
   ) {}
 
   // Create a new post
-  async create(@Body() body: any): Promise<Post> {
-    const createdPost = new this.postModel(body);
+  async create(createPostDto: CreatePostDto): Promise<Post> {
+    const createdPost = new this.postModel(createPostDto);
     return await createdPost.save();
   }
 
   // Get all posts
   async findAll(): Promise<Post[]> {
-    console.log('Getting all posts');
     return await this.postModel.find().exec();
   }
 
   // Get a post by id
-  async findOne(@Body() body: any): Promise<Post> {
-    return await this.postModel.findById(body.id).exec();
+  async findOne(id: string): Promise<Post> {
+    return await this.postModel.findById(id).exec();
   }
 
   // Update a post
@@ -34,7 +33,7 @@ export class PostsService {
   // }
 
   // Delete a post
-  async remove(@Body() body: any): Promise<any> {
-    return await this.postModel.findByIdAndRemove(body.id).exec();
+  async remove(id: string): Promise<any> {
+    return await this.postModel.findByIdAndRemove(id).exec();
   }
 }

@@ -5,12 +5,12 @@ import { PostsModule } from './posts/posts.module';
 import { GroupsModule } from './groups/groups.module';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://user:nWszQsFY6SGuOK67@chat-app.p2zkz.mongodb.net/?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     PostsModule,
     GroupsModule,
     UserModule,

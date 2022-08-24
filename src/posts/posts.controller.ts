@@ -1,18 +1,22 @@
+import { MulterField } from './../../node_modules/@nestjs/platform-express/multer/interfaces/multer-options.interface.d';
 import {
   Controller,
   Get,
   Post,
   Body,
   Request,
-  Response,
   Patch,
   Param,
   Delete,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { response } from 'express';
+import { Response } from 'express';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { StorageFile } from 'src/storage/storage-file';
 
 @Controller('posts')
 export class PostsController {

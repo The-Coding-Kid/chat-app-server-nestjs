@@ -5,6 +5,7 @@ import { PostsModule } from './posts/posts.module';
 import { GroupsModule } from './groups/groups.module';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { StorageModule } from './storage/storage.module';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ require('dotenv').config();
     PostsModule,
     GroupsModule,
     UserModule,
+    StorageModule,
   ],
   controllers: [AppController],
   providers: [AppService],

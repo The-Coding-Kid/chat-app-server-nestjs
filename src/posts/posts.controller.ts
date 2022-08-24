@@ -33,14 +33,14 @@ export class PostsController {
   }
 
   @Post('/get')
-  async findOne(@Request() request: any) {
-    const res = await this.postsService.findOne(request.body.id);
+  async findOne(@Body() body: any) {
+    const res = await this.postsService.findOne(body.body.id);
     return res;
   }
 
   @Post('/getlist')
-  async getList(@Request() request: any) {
-    const { id } = request.body;
+  async getList(@Body() body: any) {
+    const { id } = body;
     const response = [];
     for (let i = 0; i < id.length; i++) {
       const post = await this.postsService.findOne(id[i]);
@@ -57,4 +57,11 @@ export class PostsController {
   // remove(@Param('id') id: string) {
   //   return this.postsService.remove(+id);
   // }
+
+  @Post('/like')
+  async addLike(@Body() body: any) {
+    const { email, post_id } = body;
+    const post = await this.postsService.addLike(email, post_id);
+    return post;
+  }
 }

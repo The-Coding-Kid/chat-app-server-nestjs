@@ -24,7 +24,7 @@ export class PostsService {
 
   // Get a post by id
   async findOne(id: string): Promise<Post> {
-    return await this.postModel.findById(id).exec();
+    return await this.postModel.findOne({ _id: id }).exec();
   }
 
   // Update a post
@@ -35,5 +35,12 @@ export class PostsService {
   // Delete a post
   async remove(id: string): Promise<any> {
     return await this.postModel.findByIdAndRemove(id).exec();
+  }
+
+  async addLike(email: string, post_id: string): Promise<any> {
+    const post = await this.postModel.findOne({ _id: post_id }).exec();
+    post.liked_by.push(email);
+    post.likes = post.liked_by.length;
+    return await post.save();
   }
 }
